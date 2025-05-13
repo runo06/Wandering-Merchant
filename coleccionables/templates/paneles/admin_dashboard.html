@@ -1,0 +1,11 @@
+{% extends 'base_admin.html' %}
+
+{% block titulo %}
+    Dashboard Admin - Wandering Merchant
+{% endblock %}
+
+{% block content %}
+<h1>Bienvenido, Administrador {{ request.user.username }}</h1>
+<p>Aquí va el panel de control con opciones de administración.</p>
+{% endblock content %}
+

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Wandering Merchant
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-12">
+            <h1 class="display-5 fw-light text-secondary mb-4">Coleccionables</h1>
+            <a href="{% url 'crear_coleccionable' %}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-plus me-1"></i>Nuevo producto
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for producto in productos %}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="product-card position-relative">
+                {% if producto.es_nuevo %}
+                <div class="product-badge">Nuevo</div>
+                {% endif %}
+
+                <!-- Imagen -->
+                <img src="{{ producto.imagen.url }}" class="product-img img-fluid w-100" alt="{{ producto.nombre }}">
+
+                <div class="p-3">
+                    <!-- Nombre del producto -->
+                    <h5 class="mb-1">{{ producto.nombre }}</h5>
+
+                    <!-- Categoría -->
+                    <p class="text-secondary small mb-2">{{ producto.categoria }} · Edición Limitada</p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Precio -->
+                        <span class="fw-bold">${{ producto.precio }}</span>
+
+                        <!-- Botón -->
+                        <button class="btn btn-sm btn-primary-outline">
+                            <i class="fas fa-cart-plus me-1"></i> Añadir
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Link que abarca todo el card -->
+                <a href="{% url 'producto_detalle' producto.pk %}" class="stretched-link"></a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-4">
+            <p class="text-secondary">No hay productos disponibles en este momento.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+    
+    .product-img {
+        height: 220px;
+        object-fit: cover;
+        border-radius: 4px 4px 0 0;
+    }
+    
+    .product-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-radius: 4px;
+        background-color: #fff;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+    }
+    
+    .btn-outline-secondary {
+        border-color: #dee2e6;
+    }
+    
+    .btn-outline-secondary:hover {
+        background-color: #f8f9fa;
+        color: #212529;
+        border-color: #ced4da;
+    }
+</style>
+{% endblock %}

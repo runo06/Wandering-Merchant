@@ -1,0 +1,824 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ producto.nombre }} | Wandering Merchant{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    /* Estilos para la página de detalle de producto */
+    .product-main {
+        padding: 2rem 0;
+    }
+    
+    .product-image-container {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+    
+    .product-main-image {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    
+    .product-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 10;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.35rem 0.75rem;
+        border-radius: 50px;
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .product-thumbnails {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .product-thumbnail {
+        width: 70px;
+        height: 70px;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+    
+    .product-thumbnail:hover, .product-thumbnail.active {
+        border-color: var(--primary-color);
+    }
+    
+    .product-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .product-info-container {
+        padding-left: 2rem;
+    }
+    
+    .product-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+    }
+    
+    .product-category {
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .product-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .rating-stars {
+        color: #FFA41C;
+        margin-right: 0.5rem;
+    }
+    
+    .rating-count {
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+    }
+    
+    .product-price-container {
+        background-color: #F8F9FA;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .product-price {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .product-original-price {
+        font-size: 1rem;
+        color: #999;
+        text-decoration: line-through;
+        margin-left: 0.5rem;
+    }
+    
+    .product-discount {
+        display: inline-block;
+        background-color: #E8F4FE;
+        color: #0078D7;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 30px;
+        margin-left: 0.75rem;
+    }
+    
+    .product-stock {
+        color: #28a745;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        margin-top: 0.75rem;
+    }
+    
+    .product-stock.low {
+        color: #ffc107;
+    }
+    
+    .product-stock.out {
+        color: #dc3545;
+    }
+    
+    .product-stock i {
+        margin-right: 0.5rem;
+    }
+    
+    .product-quantity {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .quantity-label {
+        margin-right: 1rem;
+        font-weight: 600;
+    }
+    
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    
+    .quantity-btn {
+        background: #f5f5f5;
+        border: none;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    
+    .quantity-btn:hover {
+        background: #e9e9e9;
+    }
+    
+    .quantity-input {
+        width: 50px;
+        text-align: center;
+        border: none;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 0.5rem 0;
+    }
+    
+    .product-actions {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn-add-cart {
+        flex: 1;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-wishlist {
+        background-color: transparent;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 0.75rem;
+        color: var(--secondary-color);
+        transition: all 0.2s;
+    }
+    
+    .btn-wishlist:hover {
+        background-color: #f5f5f5;
+        color: var(--primary-color);
+    }
+    
+    .product-delivery {
+        background-color: #F8F9FA;
+        border-radius: 10px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .delivery-option {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .delivery-option:last-child {
+        margin-bottom: 0;
+    }
+    
+    .delivery-option i {
+        margin-right: 0.75rem;
+        color: var(--secondary-color);
+    }
+    
+    /* Tabs de información */
+    .product-tabs {
+        margin: 3rem 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .nav-tabs {
+        border-bottom: none;
+    }
+    
+    .nav-tabs .nav-link {
+        border: none;
+        padding: 1rem 1.5rem;
+        color: var(--text-color);
+        font-weight: 500;
+        position: relative;
+    }
+    
+    .nav-tabs .nav-link.active {
+        background-color: transparent;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    
+    .nav-tabs .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: var(--primary-color);
+    }
+    
+    .tab-content {
+        padding: 2rem 0;
+    }
+    
+    .product-description {
+        line-height: 1.8;
+    }
+    
+    .product-specs table {
+        width: 100%;
+    }
+    
+    .product-specs table tr {
+        border-bottom: 1px solid #eee;
+    }
+    
+    .product-specs table tr:last-child {
+        border-bottom: none;
+    }
+    
+    .product-specs table th,
+    .product-specs table td {
+        padding: 0.75rem 0;
+    }
+    
+    .product-specs table th {
+        width: 30%;
+        font-weight: 600;
+        color: var(--secondary-color);
+    }
+    
+    /* Comentarios */
+    .review-card {
+        border: none;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+    }
+    
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    
+    .reviewer-info {
+        display: flex;
+        align-items: center;
+    }
+    
+    .reviewer-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin-right: 0.75rem;
+    }
+    
+    .reviewer-name {
+        font-weight: 600;
+    }
+    
+    .review-date {
+        color: var(--secondary-color);
+        font-size: 0.9rem;
+    }
+    
+    .review-rating {
+        color: #FFA41C;
+        margin-bottom: 0.5rem;
+    }
+    
+    .review-text {
+        line-height: 1.6;
+    }
+    
+    .review-form {
+        background-color: #F8F9FA;
+        border-radius: 10px;
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .star-rating {
+        margin-bottom: 1.5rem;
+    }
+    
+    .star-rating .form-check-inline {
+        margin-right: 1rem;
+    }
+    
+    /* Productos relacionados */
+    .related-products {
+        margin: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--primary-color);
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .product-info-container {
+            padding-left: 0;
+            margin-top: 2rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .product-title {
+            font-size: 1.8rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+        }
+        
+        .product-actions {
+            flex-direction: column;
+        }
+        
+        .review-card {
+            padding: 1.25rem;
+        }
+    }
+</style>
+
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="container mt-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href=" {% url 'categoria' producto.categoria.slug %} ">{{ producto.categoria }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ producto.titulo }}</li>
+    </ol>
+</nav>
+
+<!-- Sección principal del producto -->
+<section class="product-main container">
+    <div class="row">
+        <!-- Galería de imágenes -->
+        <div class="col-lg-6">
+            <div class="product-image-container">
+                {% if producto.es_nuevo %}
+                <div class="product-badge">Nuevo</div>
+                {% endif %}
+                <div class="product-main-image">
+                    <img src="{{ producto.imagen.url }}" class="img-fluid" alt="{{ producto.titulo }}">
+                </div>
+                <div class="product-thumbnails">
+                    <div class="product-thumbnail active">
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    </div>
+                    <div class="product-thumbnail">
+                        <img src="/api/placeholder/150/150" alt="Vista alternativa">
+                    </div>
+                    <div class="product-thumbnail">
+                        <img src="/api/placeholder/150/150" alt="Vista alternativa">
+                    </div>
+                    <div class="product-thumbnail">
+                        <img src="/api/placeholder/150/150" alt="Vista alternativa">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Información del producto -->
+        <div class="col-lg-6 product-info-container">
+            <h1 class="product-title">{{ producto.titulo }}</h1>
+            <p class="product-category">{{ producto.categoria }} • Edición Limitada</p>
+            
+            <!-- Valoraciones -->
+            <div class="product-rating">
+                <div class="rating-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="rating-count">4.5 (24 valoraciones)</span>
+            </div>
+            
+            <!-- Precio y stock -->
+            <div class="product-price-container">
+                <div class="d-flex align-items-center">
+                    <div class="product-price">${{ producto.precio }}</div>
+                    <div class="product-original-price">${{ producto.precio|add:"20" }}</div>
+                    <div class="product-discount">-15%</div>
+                </div>
+                {% if producto.stock > 10 %}
+                    <div class="product-stock">
+                        <i class="fas fa-check-circle"></i> En stock ({{ producto.stock }} disponibles)
+                    </div>
+                {% elif producto.stock > 0 %}
+                    <div class="product-stock low">
+                        <i class="fas fa-exclamation-circle"></i> ¡Últimas unidades! ({{ producto.stock }} disponibles)
+                    </div>
+                {% else %}
+                    <div class="product-stock out">
+                        <i class="fas fa-times-circle"></i> Agotado temporalmente
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Selección de cantidad -->
+            <div class="product-quantity">
+                <span class="quantity-label">Cantidad:</span>
+                <div class="quantity-control">
+                    <button class="quantity-btn">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" value="1" min="1" max="{{ producto.stock }}" class="quantity-input">
+                    <button class="quantity-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Botones de acción -->
+            <div class="product-actions">
+                <button class="btn btn-primary btn-add-cart">
+                    <i class="fas fa-shopping-cart"></i> Añadir al carrito
+                </button>
+                <button class="btn btn-wishlist">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
+            
+            <!-- Info de envío -->
+            <div class="product-delivery">
+                <div class="delivery-option">
+                    <i class="fas fa-truck"></i>
+                    <div>Envío gratis en pedidos superiores a $50</div>
+                </div>
+                <div class="delivery-option">
+                    <i class="fas fa-undo"></i>
+                    <div>Devoluciones gratuitas durante 30 días</div>
+                </div>
+                <div class="delivery-option">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>Garantía de autenticidad</div>
+                </div>
+            </div>
+            
+            <!-- Compartir -->
+            <div class="d-flex align-items-center">
+                <span class="me-3">Compartir:</span>
+                <a href="#" class="me-2 text-secondary"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="me-2 text-secondary"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="me-2 text-secondary"><i class="fab fa-pinterest"></i></a>
+                <a href="#" class="me-2 text-secondary"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pestañas de información -->
+<section class="container product-tabs">
+    <ul class="nav nav-tabs" id="productTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Descripción</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab" aria-controls="specs" aria-selected="false">Especificaciones</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Valoraciones (24)</button>
+        </li>
+    </ul>
+    
+    <div class="tab-content" id="productTabsContent">
+        <!-- Descripción -->
+        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+            <div class="product-description">
+                <h3>Acerca de este producto</h3>
+                <p>{{ producto.descripcion|default:"Disfruta de este exclusivo coleccionable diseñado para los verdaderos entusiastas. Esta pieza única forma parte de nuestra serie especial, con detalles meticulosos y acabados de alta calidad que lo convierten en una adición invaluable para cualquier colección." }}</p>
+                
+                <p>Características principales:</p>
+                <ul>
+                    <li>Edición limitada con certificado de autenticidad</li>
+                    <li>Fabricado con materiales premium de alta calidad</li>
+                    <li>Diseñado por artistas reconocidos en la industria</li>
+                    <li>Incluye empaque especial para su conservación</li>
+                    <li>Perfecto para regalo o exhibición en vitrina</li>
+                </ul>
+                
+                <p>Este exclusivo coleccionable representa la fusión perfecta entre arte y pasión por el coleccionismo. No pierdas la oportunidad de añadir esta obra maestra a tu colección antes de que se agote.</p>
+            </div>
+        </div>
+        
+        <!-- Especificaciones -->
+        <div class="tab-pane fade" id="specs" role="tabpanel" aria-labelledby="specs-tab">
+            <div class="product-specs">
+                <table class="w-100">
+                    <tr>
+                        <th>Material</th>
+                        <td>Resina de alta calidad / PVC</td>
+                    </tr>
+                    <tr>
+                        <th>Dimensiones</th>
+                        <td>25cm x 15cm x 20cm</td>
+                    </tr>
+                    <tr>
+                        <th>Peso</th>
+                        <td>0.8 kg</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha de lanzamiento</th>
+                        <td>Enero 2025</td>
+                    </tr>
+                    <tr>
+                        <th>Fabricante</th>
+                        <td>Collectibles Pro Inc.</td>
+                    </tr>
+                    <tr>
+                        <th>País de origen</th>
+                        <td>Japón</td>
+                    </tr>
+                    <tr>
+                        <th>Empaque</th>
+                        <td>Caja premium con ventana de visualización</td>
+                    </tr>
+                    <tr>
+                        <th>Garantía</th>
+                        <td>1 año por defectos de fabricación</td>
+                    </tr>
+                    <tr>
+                        <th>Incluye</th>
+                        <td>Certificado de autenticidad, base de exhibición</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Valoraciones -->
+        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Lista de valoraciones -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    AM
+                                </div>
+                                <div>
+                                    <div class="reviewer-name">Ana Martínez</div>
+                                    <div class="review-date">12 abril, 2025</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            <p>¡Increíble adquisición! La calidad supera mis expectativas, cada detalle está perfectamente elaborado. El empaque llegó en perfectas condiciones y la pieza es exactamente como se muestra en las fotos. Definitivamente compraré más productos de esta colección.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    JL
+                                </div>
+                                <div>
+                                    <div class="reviewer-name">Javier López</div>
+                                    <div class="review-date">8 abril, 2025</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="review-text">
+                            <p>Muy buen producto aunque el envío tardó un poco más de lo esperado. La figura está muy bien detallada y viene con su certificado como se prometía. Le doy 4 estrellas porque uno de los accesorios venía ligeramente dañado, pero el servicio al cliente respondió rápidamente y me enviaron un reemplazo.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    CR
+                                </div>
+                                <div>
+                                    <div class="reviewer-name">Carlos Ruiz</div>
+                                    <div class="review-date">1 abril, 2025</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="review-text">
+                            <p>Como coleccionista experimentado, puedo decir que esta pieza tiene una relación calidad-precio excepcional. Los detalles son impresionantes y se nota el cuidado en la fabricación. Muy satisfecho con mi compra y con el embalaje protector para evitar daños durante el envío.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Paginación -->
+                    <nav aria-label="Review pagination">
+                        <ul class="pagination justify-content-center mt-4">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <!-- Formulario de valoración -->
+                    <div class="review-form">
+                        <h4 class="mb-3">Deja tu valoración</h4>
+                        <form>
+                            <div class="mb-3 star-rating">
+                                <label class="form-label">Tu puntuación:</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating1" value="1">
+                                        <label class="form-check-label" for="rating1">1</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating2" value="2">
+                                        <label class="form-check-label" for="rating2">2</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating3" value="3">
+                                        <label class="form-check-label" for="rating3">3</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating4" value="4">
+                                        <label class="form-check-label" for="rating4">4</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating" id="rating5" value="5" checked>
+                                        <label class="form-check-label" for="rating5">5</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="reviewTitle" class="form-label">Título de tu valoración</label>
+                                <input type="text" class="form-control" id="reviewTitle" placeholder="Ej: Excelente adquisición">
+                            </div>
+                            <div class="mb-3">
+                                <label for="reviewText" class="form-label">Tu opinión</label>
+                                <textarea class="form-control" id="reviewText" rows="4" placeholder="Comparte tu experiencia con este producto..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Publicar valoración</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-3 mb-4">
+                        <h5 class="mb-3">Valoración promedio</h5>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="display-4 fw-bold me-3">4.5</span>
+                            <div>
+                                <div class="text-warning mb-1">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-muted">Basado en 24 valoraciones</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="me-2">5</span>
+                                <i class="fas fa-star text-warning me-2"></i>
+                                <div class="progress flex-grow-1" style="height: 8px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%"></div>
+                                </div>
+                                <span class="ms-2">18</span>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="me-2">4</span>
+                                <i class="fas fa-star text-warning me-2"></i>
+                                <div class="progress flex-grow-1" style="height: 8px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 15%"></div>
+                                </div>
+                                <span class="ms-2">4</span>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="me-2">3</span>
+                                <i class="fas fa-star text-warning me-2"></i>
+                                <div class="progress flex-grow-1" style="height: 8px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 15%"></div>
+                                </div>
+                                <span class="ms-2">3</span>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="me-2">2</span>
+                                <i class="fas fa-star text-warning me-2"></i>
+                                <div class="progress flex-grow-1" style="height: 8px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 15%"></div>
+                                </div>
+                                <span class="ms-2">2</span>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="me-2">1</span>
+                                <i class="fas fa-star text-warning me-2"></i>
+                                <div class="progress flex-grow-1" style="height: 8px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 15%"></div>
+                                </div>
+                                <span class="ms-2">1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>     
+
+{% endblock %}

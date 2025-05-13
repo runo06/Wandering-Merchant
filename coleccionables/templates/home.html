@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Wandering Merchant
+{% endblock %}
+
+{% load static %}
+
+{% block title %}Wandering Merchant - Coleccionables Exclusivos{% endblock %}
+
+{% block content %}
+
+<style>
+    .product-img {
+        height: 240px;
+        object-fit: cover;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .hero-section {
+        padding: 5rem 0;
+        background-color: #F8F9FA;
+        border-bottom: 1px solid #EEEEEE;
+    }
+    
+    .hero-heading {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+    
+    .hero-image {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    
+    .category-card {
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+    }
+    
+    .category-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .category-card img {
+        height: 160px;
+        object-fit: cover;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .testimonial-card {
+        border: none;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        height: 100%;
+    }
+    
+    .testimonial-stars {
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+    
+    .newsletter-section {
+        background-color: #F8F9FA;
+        border-radius: 12px;
+        padding: 3rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    
+    .newsletter-form .form-control {
+        border-radius: 6px;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid #E0E0E0;
+    }
+    
+    .brand-logo {
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        max-height: 50px;
+        width: auto;
+    }
+    
+    .brand-logo:hover {
+        opacity: 1;
+    }
+    
+    .btn-primary-outline {
+        color: var(--primary-color);
+        background-color: transparent;
+        border: 1px solid var(--primary-color);
+    }
+    
+    .btn-primary-outline:hover {
+        color: white;
+        background-color: var(--primary-color);
+    }
+    
+    .product-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 10;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.35rem 0.75rem;
+        border-radius: 50px;
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero-image {
+            margin-top: 2rem;
+        }
+        
+        .hero-heading {
+            font-size: 2rem;
+        }
+        
+        .newsletter-section {
+            padding: 2rem 1.5rem;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="hero-heading">Coleccionables Exclusivos</h1>
+                <p class="lead mb-4 text-secondary">Descubre piezas únicas para completar tu colección. Envíos a todo el país.</p>
+                <a href="#featured" class="btn btn-primary px-4 py-2">Explorar colección</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image">
+                    <img src="{% static 'images/imagen_banner.jpg' %}" alt="Coleccionables destacados" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="container mb-5">
+    <h2 class="section-title text-center">Categorías Populares</h2>
+    <div class="row g-4">
+        {% for categoria in categorias %}
+        <div class="col-6 col-md-3">
+            <a href="{% url 'categoria' categoria.slug %}" class="text-decoration-none text-dark">
+                <div class="category-card shadow text-center h-100">
+                    <div class="category-img-wrapper">
+                        {% if categoria.imagen %}
+                        <img src="{{ categoria.imagen.url }}" alt="{{ categoria.nombre }}" class="img-fluid" style="height: 200px; object-fit: cover; width: 100%;">
+                        {% else %}
+                        <img src="{% static 'images/default_categoria.jpg' %}" alt="{{ categoria.nombre }}" class="img-fluid" style="height: 200px; object-fit: cover; width: 100%;">
+                        {% endif %}
+                    </div>
+                    <div class="p-3">
+                        <h5 class="mb-2">{{ categoria.nombre }}</h5>
+                        <a href="{% url 'categoria' categoria.slug %}" class="btn btn-primary">Explorar</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<!-- Featured Products -->
+<section id="featured" class="container mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title m-0">Productos Destacados</h2>
+        <a href="#" class="text-decoration-none text-secondary">Ver todos <i class="fas fa-arrow-right ms-1"></i></a>
+    </div>
+
+    <div class="row g-4">
+        {% for producto in productos %}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="product-card position-relative">
+                {% if producto.es_nuevo %}
+                <div class="product-badge">Nuevo</div>
+                {% endif %}
+
+                <!-- Imagen -->
+                <img src="{{ producto.imagen.url }}" class="product-img img-fluid w-100" alt="{{ producto.nombre }}">
+
+                <div class="p-3">
+                    <!-- Nombre del producto -->
+                    <h5 class="mb-1">{{ producto.nombre }}</h5>
+
+                    <!-- Categoría -->
+                    <p class="text-secondary small mb-2">{{ producto.categoria }} · Edición Limitada</p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Precio -->
+                        <span class="fw-bold">${{ producto.precio }}</span>
+
+                        <!-- Botón -->
+                        <button class="btn btn-sm btn-primary-outline">
+                            <i class="fas fa-cart-plus me-1"></i> Añadir
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Link que abarca todo el card -->
+                <a href="{% url 'producto_detalle' producto.pk %}" class="stretched-link"></a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-4">
+            <p class="text-secondary">No hay productos disponibles en este momento.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="container mb-5">
+    <h2 class="section-title text-center">Lo que dicen nuestros clientes</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-3">"El empaque fue excelente, mi figura llegó en perfectas condiciones. Definitivamente volvería a comprar aquí."</p>
+                <p class="text-secondary mb-0">- Carlos M.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="mb-3">"Encontré esa carta que buscaba hace años. El servicio al cliente fue excepcional y el envío muy rápido."</p>
+                <p class="text-secondary mb-0">- Ana P.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="mb-3">"Precios muy competitivos y productos auténticos certificados. Mi colección ha crecido gracias a esta tienda."</p>
+                <p class="text-secondary mb-0">- Miguel R.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="container mb-5">
+    <div class="newsletter-section">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h3 class="mb-3">Suscríbete a nuestro boletín</h3>
+                <p class="text-secondary mb-4">Recibe notificaciones sobre nuevos productos y ofertas exclusivas.</p>
+                <form class="newsletter-form row g-3 justify-content-center">
+                    <div class="col-12 col-md-8">
+                        <input type="email" class="form-control" placeholder="Tu correo electrónico">
+                    </div>
+                    <div class="col-12 col-md-auto">
+                        <button type="submit" class="btn btn-primary w-100 px-4">Suscribirse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brands Section -->
+<section class="container mb-5">
+    <h2 class="section-title text-center">Marcas destacadas</h2>
+    <div class="row g-4 align-items-center justify-content-center">
+        <div class="col-4 col-md-2 text-center">
+            <img src="/api/placeholder/120/60" alt="Marca 1" class="brand-logo">
+        </div>
+        <div class="col-4 col-md-2 text-center">
+            <img src="/api/placeholder/120/60" alt="Marca 2" class="brand-logo">
+        </div>
+        <div class="col-4 col-md-2 text-center">
+            <img src="/api/placeholder/120/60" alt="Marca 3" class="brand-logo">
+        </div>
+        <div class="col-4 col-md-2 text-center">
+            <img src="/api/placeholder/120/60" alt="Marca 4" class="brand-logo">
+        </div>
+        <div class="col-4 col-md-2 text-center">
+            <img src="/api/placeholder/120/60" alt="Marca 5" class="brand-logo">
+        </div>
+        <div class="col-4 col-md-2 text-center">
+            <img src="/api/placeholder/120/60" alt="Marca 6" class="brand-logo">
+        </div>
+    </div>
+</section>
+
+{% endblock %}

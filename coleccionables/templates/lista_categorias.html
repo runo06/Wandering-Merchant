@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Categorias{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Todas las Categorías</h2>
+    <div class="row">
+        {% for categoria in categorias %}
+        <div class="col-12 col-md-4 mb-3">
+            <div class="card shadow">
+                <img src="{{ categoria.imagen.url }}" alt="{{ categoria.nombre }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ categoria.nombre }}</h5>
+                    <a href="{% url 'categoria' categoria.slug %}" class="btn btn-primary">Ver Coleccionables</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
