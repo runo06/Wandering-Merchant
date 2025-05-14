@@ -64,7 +64,6 @@ def user_login(request):
 
         if user is not None:
             django_login(request, user)
-            messages.success(request, f'Bienvenido {user.username}')
             return redirect('home') 
         else:
             messages.error(request, 'Usuario o contraseña incorrectos')
