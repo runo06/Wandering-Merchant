@@ -168,11 +168,6 @@
     <aside class="sidebar">
         <ul class="sidebar-nav">
             <li>
-                <a href="{% url 'lista_coleccionables' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
-                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                </a>
-            </li>
-            <li>
                 <a href="{% url 'lista_coleccionables' %}" class="{% if 'users' in request.path %}active{% endif %}">
                     <i class="fas fa-users"></i> Usuarios
                 </a>
