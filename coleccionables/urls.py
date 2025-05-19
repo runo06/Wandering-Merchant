@@ -8,6 +8,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),  
     path('login/', views.user_login, name='login'),  
     path('logout/', views.user_logout, name='logout'),
+    path('registro/', views.registro, name='registro'),
     path('coleccionables/', views.lista_coleccionables, name='lista_coleccionables'),
     path('coleccionables/nuevo/', views.crear_coleccionable, name='crear_coleccionable'),
 
