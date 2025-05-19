@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Coleccionable, Categoria
 from .form import ColeccionableForm 
+from .form import RegistroUsuarioForm
 from django.contrib.auth import login as django_login, authenticate
 from django.contrib.auth import logout as django_logout
 from django.contrib import messages
@@ -103,3 +104,15 @@ def vendedor_dashboard(request):
     if request.user.rol != 'vendedor':
         return redirect('login')
     return render(request, 'paneles/vendedor_dashboard.html')
+
+
+def registro(request):
+    if request.method == 'POST':
+        form = RegistroUsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '¡Usuario registrado con éxito!')
+            return redirect('login')  
+    else:
+        form = RegistroUsuarioForm()
+    return render(request, 'registro.html', {'form': form})
