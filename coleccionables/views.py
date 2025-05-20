@@ -69,6 +69,7 @@ def agregar_al_carrito(request, producto_id):
     messages.success(request, 'Producto agregado al carrito')
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+@login_required
 def ver_carrito(request):
     usuario = request.user
     carrito_items = Carrito.objects.filter(usuario=usuario)
@@ -82,6 +83,7 @@ def ver_carrito(request):
         'total': total
     })
 
+@login_required
 def quitar_del_carrito(request, producto_id):
     producto = get_object_or_404(Coleccionable, id=producto_id)
     
@@ -95,6 +97,7 @@ def quitar_del_carrito(request, producto_id):
     
     return redirect('ver_carrito')
 
+@login_required
 def vaciar_carrito(request):
     Carrito.objects.filter(usuario=request.user).delete()
     messages.success(request, "Tu carrito ha sido vaciado.")
