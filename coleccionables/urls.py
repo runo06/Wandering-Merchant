@@ -23,8 +23,12 @@ urlpatterns = [
     path('categoria/<slug:slug>/', views.productos_por_categoria, name='categoria'),
     path('categorias/', views.lista_categorias, name='lista_categorias'),
 
+    path('politica-privacidad/', views.politica_privacidad, name='politica_privacidad'),
+    path('terminos-condiciones/', views.terminos_condiciones, name='terminos_condiciones'),
 
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

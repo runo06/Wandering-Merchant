@@ -116,3 +116,11 @@ def registro(request):
     else:
         form = RegistroUsuarioForm()
     return render(request, 'registro.html', {'form': form})
+
+# SE DEFINEN LAS VISTAS DE LAS POLITICAS Y TERMINOS
+
+def politica_privacidad(request):
+    return render(request, 'politica_privacidad.html')
+
+def terminos_condiciones(request):
+    return render(request, 'terminos_condiciones.html')
