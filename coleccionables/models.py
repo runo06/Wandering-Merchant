@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
+from django.contrib.auth.models import User
+from django.conf import settings
 
 class UsuarioPersonalizado(AbstractUser):
     ROLES = (
@@ -41,3 +43,15 @@ class Coleccionable(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+class Carrito(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    coleccionable = models.ForeignKey(Coleccionable, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+
+
+class ItemCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Coleccionable, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)

@@ -500,12 +500,23 @@
                     </button>
                 </div>
             </div>
+
+            {% if messages %}
+            <ul class="mensajes">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
             
             <!-- Botones de acción -->
             <div class="product-actions">
-                <button class="btn btn-primary btn-add-cart">
-                    <i class="fas fa-shopping-cart"></i> Añadir al carrito
-                </button>
+                <form method="POST" action="{% url 'agregar_al_carrito' producto.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary btn-add-cart" type="submit">
+                        <i class="fas fa-shopping-cart"></i> Añadir al carrito
+                    </button>
+                </form>
                 <button class="btn btn-wishlist">
                     <i class="fas fa-heart"></i>
                 </button>
