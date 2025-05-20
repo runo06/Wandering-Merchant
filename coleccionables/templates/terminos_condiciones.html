@@ -3,114 +3,480 @@
 {% block title %}Términos y Condiciones - Wandering Merchant{% endblock %}
 
 {% block content %}
+<!-- Estilos personalizados para el color naranja claro -->
+<style>
+    .bg-custom-orange {
+        background-color: #484443; 
+    }
+    .text-custom-orange {
+        color: #5c5652; 
+    }
+    .border-custom-orange {
+        border-color: #ff4800 !important;
+    }
+    .alert-custom-orange {
+        background-color: rgba(255, 160, 122, 0.2);
+        border-color: rgba(255, 160, 122, 0.3);
+    }
+    .badge-custom-orange {
+        background-color: #ff6200;
+        color: white;
+    }
+</style>
+
 <div class="container py-5">
+    <!-- Header con fondo de color -->
+    <div class="bg-custom-orange text-white p-4 rounded-top mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 mb-0">Términos y Condiciones</h1>
+                <p class="lead mb-0">Normas de uso de nuestros servicios</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <p class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Última actualización: 20 de mayo de 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Introducción con diseño destacado -->
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="alert alert-custom-orange p-4 shadow-sm">
+                <div class="d-flex">
+                    <div class="me-3">
+                        <i class="fas fa-info-circle fa-2x text-custom-orange"></i>
+                    </div>
+                    <div>
+                        <h2 class="h4 text-custom-orange">Acuerdo con nuestros usuarios</h2>
+                        <p class="mb-0">Bienvenido a Wandering Merchant, su destino especializado en productos coleccionables. Estos términos y condiciones rigen el uso de nuestro sitio web y la compra de productos. Al acceder a nuestro sitio o realizar una compra, usted acepta estos términos en su totalidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <h1 class="mb-4">Términos y Condiciones</h1>
-            <p class="text-muted mb-4">Última actualización: 20 de mayo de 2025</p>
-            
-            <div class="card shadow-sm mb-4">
+            <!-- Navegación rápida -->
+            <div class="card mb-4 border-custom-orange">
+                <div class="card-header bg-custom-orange text-white">
+                    <h2 class="h5 mb-0">Contenido del documento</h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">1. Introducción</h2>
-                    <p>Bienvenido a Wandering Merchant, su destino especializado en productos coleccionables. Estos términos y condiciones rigen el uso de nuestro sitio web y la compra de productos. Al acceder a nuestro sitio o realizar una compra, usted acepta estos términos en su totalidad.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">1</span> Introducción
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">2</span> Definiciones
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">3</span> Cuenta de usuario
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">4</span> Productos y precios
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">5</span> Pedidos y pagos
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">6</span> Envíos y entregas
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">7</span> Devoluciones y reembolsos
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">8</span> Propiedad intelectual
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">9</span> Limitación de responsabilidad
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">10</span> Modificaciones
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">11</span> Ley aplicable
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">12</span> Contacto
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 1 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">1</span>
+                        Introducción
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">2. Definiciones</h2>
-                    <ul>
-                        <li><strong>"Nosotros", "nuestro", "nuestra"</strong> se refiere a Wandering Merchant</li>
-                        <li><strong>"Plataforma", "sitio web", "tienda"</strong> se refiere a wanderingmerchant.com y todas sus páginas</li>
-                        <li><strong>"Usuario", "cliente", "usted"</strong> se refiere a cualquier persona que acceda a nuestro sitio o realice compras</li>
-                        <li><strong>"Productos"</strong> se refiere a los artículos coleccionables disponibles para su compra</li>
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="fas fa-handshake fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Bienvenido a Wandering Merchant, su destino especializado en productos coleccionables. Estos términos y condiciones rigen el uso de nuestro sitio web y la compra de productos. Al acceder a nuestro sitio o realizar una compra, usted acepta estos términos en su totalidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 2 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">2</span>
+                        Definiciones
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <p>A lo largo de este documento utilizamos los siguientes términos:</p>
+                    <ul class="list-group list-group-flush mb-0">
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-store text-custom-orange me-2"></i>
+                            <strong>"Nosotros", "nuestro", "nuestra"</strong> se refiere a Wandering Merchant
+                        </li>
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-globe text-custom-orange me-2"></i>
+                            <strong>"Plataforma", "sitio web", "tienda"</strong> se refiere a wanderingmerchant.com y todas sus páginas
+                        </li>
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-user text-custom-orange me-2"></i>
+                            <strong>"Usuario", "cliente", "usted"</strong> se refiere a cualquier persona que acceda a nuestro sitio o realice compras
+                        </li>
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-box text-custom-orange me-2"></i>
+                            <strong>"Productos"</strong> se refiere a los artículos coleccionables disponibles para su compra
+                        </li>
                     </ul>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 3 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">3</span>
+                        Cuenta de usuario
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">3. Cuenta de usuario</h2>
-                    <p>Para realizar compras en nuestra tienda, puede crear una cuenta o comprar como invitado. Si crea una cuenta, es responsable de mantener la confidencialidad de su contraseña y de restringir el acceso a su cuenta. Debe notificarnos inmediatamente sobre cualquier uso no autorizado de su cuenta.</p>
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="fas fa-user-circle fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Para realizar compras en nuestra tienda, puede crear una cuenta o comprar como invitado. Si crea una cuenta, es responsable de mantener la confidencialidad de su contraseña y de restringir el acceso a su cuenta. Debe notificarnos inmediatamente sobre cualquier uso no autorizado de su cuenta.</p>
+                            <div class="alert alert-light d-flex align-items-center">
+                                <i class="fas fa-shield-alt text-custom-orange me-3"></i>
+                                <div>Le recomendamos utilizar contraseñas seguras y únicas para proteger su información personal y facilitar una experiencia de compra más ágil en futuras visitas.</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 4 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">4</span>
+                        Productos y precios
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">4. Productos y precios</h2>
-                    <p>Nos esforzamos por ofrecer productos coleccionables auténticos y de alta calidad. Las descripciones e imágenes de los productos se proporcionan con la mayor precisión posible, pero no garantizamos que sean exactas al 100%. Los precios están sujetos a cambios sin previo aviso y son válidos en el momento de realizar el pedido.</p>
-                    <p>La disponibilidad de los productos coleccionables puede ser limitada debido a su naturaleza exclusiva. Los productos se venden por orden de llegada.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-gem"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Autenticidad</h5>
+                                    <p class="mb-0 small">Nos esforzamos por ofrecer productos coleccionables auténticos y de alta calidad.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Descripciones</h5>
+                                    <p class="mb-0 small">Las descripciones e imágenes de los productos se proporcionan con la mayor precisión posible.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-tag"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Precios</h5>
+                                    <p class="mb-0 small">Los precios están sujetos a cambios sin previo aviso y son válidos en el momento de realizar el pedido.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-boxes"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Disponibilidad</h5>
+                                    <p class="mb-0 small">La disponibilidad puede ser limitada debido a su naturaleza exclusiva. Los productos se venden por orden de llegada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 5 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">5</span>
+                        Pedidos y pagos
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">5. Pedidos y pagos</h2>
-                    <p>Al realizar un pedido, usted confirma que toda la información proporcionada es precisa y completa. Nos reservamos el derecho de cancelar pedidos en caso de errores en los precios, productos agotados o por sospecha de fraude.</p>
-                    <p>Aceptamos varios métodos de pago como se indica en nuestro proceso de compra. Todos los pagos se procesan de forma segura. La propiedad de los productos no se transfiere hasta que se haya recibido el pago completo.</p>
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <i class="fas fa-shopping-cart fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Al realizar un pedido, usted confirma que toda la información proporcionada es precisa y completa. Nos reservamos el derecho de cancelar pedidos en caso de errores en los precios, productos agotados o por sospecha de fraude.</p>
+                            <p>Aceptamos varios métodos de pago como se indica en nuestro proceso de compra. Todos los pagos se procesan de forma segura. La propiedad de los productos no se transfiere hasta que se haya recibido el pago completo.</p>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="alert alert-light d-flex align-items-center">
+                                        <i class="fas fa-credit-card text-custom-orange me-3"></i>
+                                        <div>Aceptamos tarjetas de crédito/débito, PayPal y transferencias bancarias.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="alert alert-light d-flex align-items-center">
+                                        <i class="fas fa-lock text-custom-orange me-3"></i>
+                                        <div>Utilizamos tecnología SSL para garantizar transacciones seguras.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 6 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">6</span>
+                        Envíos y entregas
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">6. Envíos y entregas</h2>
-                    <p>Los tiempos de envío son estimados y pueden variar según su ubicación y otros factores. Nos esforzamos por procesar los pedidos rápidamente, pero no garantizamos fechas de entrega específicas. Los gastos de envío y cualquier impuesto aplicable se mostrarán durante el proceso de compra.</p>
-                    <p>Para artículos coleccionables de alto valor, es posible que se requiera firma en la entrega. El riesgo de pérdida o daño se transfiere al cliente en el momento de la entrega.</p>
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <i class="fas fa-truck fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Los tiempos de envío son estimados y pueden variar según su ubicación y otros factores. Nos esforzamos por procesar los pedidos rápidamente, pero no garantizamos fechas de entrega específicas. Los gastos de envío y cualquier impuesto aplicable se mostrarán durante el proceso de compra.</p>
+                            <p>Para artículos coleccionables de alto valor, es posible que se requiera firma en la entrega. El riesgo de pérdida o daño se transfiere al cliente en el momento de la entrega.</p>
+                            <div class="card bg-light mt-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center mb-3 mb-md-0">
+                                                <i class="fas fa-globe-americas text-custom-orange me-2"></i>
+                                                <div>
+                                                    <h6 class="mb-0">Envíos nacionales</h6>
+                                                    <p class="small mb-0">3-5 días hábiles</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-plane text-custom-orange me-2"></i>
+                                                <div>
+                                                    <h6 class="mb-0">Envíos internacionales</h6>
+                                                    <p class="small mb-0">7-15 días hábiles</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 7 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">7</span>
+                        Devoluciones y reembolsos
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">7. Devoluciones y reembolsos</h2>
-                    <p>Debido a la naturaleza única de los productos coleccionables, nuestra política de devoluciones es limitada. Aceptamos devoluciones en los siguientes casos:</p>
-                    <ul>
-                        <li>Productos dañados o defectuosos recibidos</li>
-                        <li>Productos incorrectos enviados</li>
-                    </ul>
-                    <p>Las solicitudes de devolución deben realizarse dentro de los 14 días posteriores a la recepción del producto. Nos reservamos el derecho de inspeccionar los productos devueltos antes de procesar cualquier reembolso.</p>
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <i class="fas fa-exchange-alt fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Debido a la naturaleza única de los productos coleccionables, nuestra política de devoluciones es limitada. Aceptamos devoluciones en los siguientes casos:</p>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="alert alert-light d-flex align-items-center">
+                                        <i class="fas fa-exclamation-triangle text-custom-orange me-3"></i>
+                                        <div>Productos dañados o defectuosos recibidos</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="alert alert-light d-flex align-items-center">
+                                        <i class="fas fa-random text-custom-orange me-3"></i>
+                                        <div>Productos incorrectos enviados</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Las solicitudes de devolución deben realizarse dentro de los 14 días posteriores a la recepción del producto. Nos reservamos el derecho de inspeccionar los productos devueltos antes de procesar cualquier reembolso.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 8 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">8</span>
+                        Propiedad intelectual
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">8. Propiedad intelectual</h2>
-                    <p>Todo el contenido de nuestro sitio, incluyendo texto, gráficos, logotipos, imágenes y software, está protegido por derechos de autor y otros derechos de propiedad intelectual. No está permitido usar, reproducir o distribuir nuestro contenido sin autorización previa.</p>
-                    <p>Los nombres y marcas comerciales de los productos coleccionables que vendemos son propiedad de sus respectivos titulares y se utilizan únicamente con fines descriptivos.</p>
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <i class="fas fa-copyright fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Todo el contenido de nuestro sitio, incluyendo texto, gráficos, logotipos, imágenes y software, está protegido por derechos de autor y otros derechos de propiedad intelectual. No está permitido usar, reproducir o distribuir nuestro contenido sin autorización previa.</p>
+                            <p>Los nombres y marcas comerciales de los productos coleccionables que vendemos son propiedad de sus respectivos titulares y se utilizan únicamente con fines descriptivos.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 9 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">9</span>
+                        Limitación de responsabilidad
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">9. Limitación de responsabilidad</h2>
-                    <p>En la medida permitida por la ley, excluimos todas las garantías y no seremos responsables por daños indirectos, incidentales o consecuentes derivados del uso de nuestro sitio o la compra de nuestros productos.</p>
-                    <p>Para coleccionables de inversión, no garantizamos su valor futuro ni proporcionamos asesoramiento financiero sobre su potencial de apreciación.</p>
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <i class="fas fa-balance-scale fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>En la medida permitida por la ley, excluimos todas las garantías y no seremos responsables por daños indirectos, incidentales o consecuentes derivados del uso de nuestro sitio o la compra de nuestros productos.</p>
+                            <div class="alert alert-light mt-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-chart-line text-custom-orange me-3"></i>
+                                    <div>Para coleccionables de inversión, no garantizamos su valor futuro ni proporcionamos asesoramiento financiero sobre su potencial de apreciación.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 10 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">10</span>
+                        Modificaciones
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">10. Modificaciones</h2>
-                    <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios serán efectivos inmediatamente después de su publicación en nuestro sitio. Es su responsabilidad revisar regularmente estos términos para estar al tanto de cualquier cambio.</p>
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <i class="fas fa-sync-alt fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios serán efectivos inmediatamente después de su publicación en nuestro sitio. Es su responsabilidad revisar regularmente estos términos para estar al tanto de cualquier cambio.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 11 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">11</span>
+                        Ley aplicable
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">11. Ley aplicable</h2>
-                    <p>Estos términos y condiciones se rigen por las leyes del país donde está registrada nuestra empresa, sin considerar sus disposiciones sobre conflictos de leyes.</p>
+                    <div class="d-flex align-items-start">
+                        <div class="me-3">
+                            <i class="fas fa-gavel fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Estos términos y condiciones se rigen por las leyes del país donde está registrada nuestra empresa, sin considerar sus disposiciones sobre conflictos de leyes.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 12 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">12</span>
+                        Contacto
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">12. Contacto</h2>
                     <p>Si tiene alguna pregunta sobre estos términos y condiciones, puede contactarnos en:</p>
-                    <address>
-                        <strong>Wandering Merchant</strong><br>
-                        Email: info@wanderingmerchant.com<br>
-                        Teléfono: +XX XXX XXX XXX<br>
-                        Dirección: [Tu dirección física]
-                    </address>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <address>
+                                        <h5><i class="fas fa-store text-custom-orange me-2"></i> Wandering Merchant</h5>
+                                        <p class="mb-0">
+                                            <i class="fas fa-map-marker-alt text-custom-orange me-2"></i> [Tu dirección física]
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2">
+                                        <i class="fas fa-envelope text-custom-orange me-2"></i>
+                                        <a href="mailto:info@wanderingmerchant.com" class="text-decoration-none">info@wanderingmerchant.com</a>
+                                    </p>
+                                    <p class="mb-0">
+                                        <i class="fas fa-phone text-custom-orange me-2"></i>
+                                        <a href="tel:+XXXXXXXXXXXX" class="text-decoration-none">+XX XXX XXX XXX</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
