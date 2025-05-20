@@ -28,8 +28,12 @@ urlpatterns = [
     path('quitar-del-carrito/<int:producto_id>/', views.quitar_del_carrito, name='quitar_del_carrito'),
     path('vaciar-carrito/', views.vaciar_carrito, name='vaciar_carrito'),
 
+    path('politica-privacidad/', views.politica_privacidad, name='politica_privacidad'),
+    path('terminos-condiciones/', views.terminos_condiciones, name='terminos_condiciones'),
 
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
