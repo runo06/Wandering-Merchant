@@ -19,9 +19,14 @@ urlpatterns = [
     path('dashboard/vendedor/', views.vendedor_dashboard, name='vendedor_dashboard'),
     
     path('producto/<int:pk>/', views.producto_detalle, name='producto_detalle'),
+    path('agregar-al-carrito/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+
 
     path('categoria/<slug:slug>/', views.productos_por_categoria, name='categoria'),
     path('categorias/', views.lista_categorias, name='lista_categorias'),
+    path('carrito/', views.ver_carrito, name='ver_carrito'),
+    path('quitar-del-carrito/<int:producto_id>/', views.quitar_del_carrito, name='quitar_del_carrito'),
+    path('vaciar-carrito/', views.vaciar_carrito, name='vaciar_carrito'),
 
 
 ]

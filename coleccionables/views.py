@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Coleccionable, Categoria
+from .models import Coleccionable, Categoria, Carrito, ItemCarrito
 from .form import ColeccionableForm 
 from .form import RegistroUsuarioForm
 from django.contrib.auth import login as django_login, authenticate
 from django.contrib.auth import logout as django_logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import UsuarioPersonalizado
+
 
 def lista_coleccionables(request):
     productos = Coleccionable.objects.all()
@@ -50,6 +50,56 @@ def productos_por_categoria(request, slug):
 def lista_categorias(request):
     categorias = Categoria.objects.all()
     return render(request, 'lista_categorias.html', {'categorias': categorias})
+
+
+@login_required
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Coleccionable, id=producto_id)
+    usuario = request.user
+
+    carrito_item, creado = Carrito.objects.get_or_create(usuario=usuario, coleccionable=producto)
+
+    if not creado:
+        carrito_item.cantidad += 1
+        carrito_item.save()
+    else:
+        carrito_item.cantidad = 1
+        carrito_item.save()
+
+    messages.success(request, 'Producto agregado al carrito')
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+def ver_carrito(request):
+    usuario = request.user
+    carrito_items = Carrito.objects.filter(usuario=usuario)
+    total = sum(item.coleccionable.precio * item.cantidad for item in carrito_items)
+    
+    for item in carrito_items:
+        item.subtotal = item.coleccionable.precio * item.cantidad
+    
+    return render(request, 'carrito.html', {
+        'carrito_items': carrito_items,
+        'total': total
+    })
+
+def quitar_del_carrito(request, producto_id):
+    producto = get_object_or_404(Coleccionable, id=producto_id)
+    
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
+    
+    if producto in carrito.coleccionable.all():
+        carrito.coleccionable.remove(producto)
+        messages.success(request, f'Producto "{producto.nombre}" eliminado del carrito.')
+    else:
+        messages.warning(request, 'El producto no estaba en el carrito.')
+    
+    return redirect('ver_carrito')
+
+def vaciar_carrito(request):
+    Carrito.objects.filter(usuario=request.user).delete()
+    messages.success(request, "Tu carrito ha sido vaciado.")
+    return redirect('ver_carrito')
+
 
 def user_login(request):
     

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .table td img {
+        max-width: 80px;
+        height: auto;
+        border-radius: 8px;
+    }
+    .btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+</style>
+<div class="container mt-5">
+    <h2 class="mb-4">🛒 Tu carrito de compras</h2>
+
+    {% if carrito_items %}
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carrito_items %}
+            <tr>
+                <td>
+                    {% if item.producto.imagen %}
+                        <img src="{{ item.coleccionable.imagen.url }}" alt="{{ item.coleccionable.nombre }}" width="80">
+                    {% else %}
+                        <span>Sin imagen</span>
+                    {% endif %}
+                </td>
+                <td>{{ item.producto.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>${{ item.producto.precio }}</td>
+                <td>${{ item.subtotal }}</td>
+                <td>
+                    <form action="{% url 'quitar_del_carrito' item.coleccionable.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Quitar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="table-light">
+            <tr>
+                <td colspan="4" class="text-end"><strong>Total:</strong></td>
+                <td colspan="2"><strong>${{ total }}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="d-flex justify-content-between">
+        <a href="{% url 'vaciar_carrito' %}" class="btn btn-outline-danger">🗑 Vaciar carrito</a>
+        <a href="{% url 'vaciar_carrito' %}" class="btn btn-success">💳 Finalizar compra</a>
+    </div>
+
+    {% else %}
+        <div class="alert alert-info text-center">
+            Tu carrito está vacío 😕 <br>
+            <a href="{% url 'lista_coleccionables' %}" class="btn btn-primary mt-3">Explorar productos</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
