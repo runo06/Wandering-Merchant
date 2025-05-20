@@ -3,103 +3,374 @@
 {% block title %}Política de Privacidad - Wandering Merchant{% endblock %}
 
 {% block content %}
+<!-- Estilos personalizados para el color naranja claro -->
+<style>
+    .bg-custom-orange {
+        background-color: #484443; 
+    }
+    .text-custom-orange {
+        color: #5c5652; 
+    }
+    .border-custom-orange {
+        border-color: #ff4800 !important;
+    }
+    .alert-custom-orange {
+        background-color: rgba(255, 160, 122, 0.2);
+        border-color: rgba(255, 160, 122, 0.3);
+    }
+    .badge-custom-orange {
+        background-color: #ff6200;
+        color: white;
+    }
+</style>
+
 <div class="container py-5">
+    <!-- Header con fondo de color -->
+    <div class="bg-custom-orange text-white p-4 rounded-top mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 mb-0">Política de Privacidad</h1>
+                <p class="lead mb-0">Protegemos tu información personal</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <p class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Última actualización: 20 de mayo de 2025</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Introducción con diseño destacado -->
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="alert alert-custom-orange p-4 shadow-sm">
+                <div class="d-flex">
+                    <div class="me-3">
+                        <i class="fas fa-info-circle fa-2x text-custom-orange"></i>
+                    </div>
+                    <div>
+                        <h2 class="h4 text-custom-orange">Compromiso con tu privacidad</h2>
+                        <p class="mb-0">En Wandering Merchant valoramos tu confianza y nos comprometemos a proteger tu información personal. Esta política explica cómo recopilamos y utilizamos tus datos cuando interactúas con nuestra tienda de coleccionables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <h1 class="mb-4">Política de Privacidad</h1>
-            <p class="text-muted mb-4">Última actualización: 20 de mayo de 2025</p>
-            
-            <div class="card shadow-sm mb-4">
+            <!-- Navegación rápida -->
+            <div class="card mb-4 border-custom-orange">
+                <div class="card-header bg-custom-orange text-white">
+                    <h2 class="h5 mb-0">Contenido de la Política</h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">1. Introducción</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">1</span> Introducción
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">2</span> Información que recopilamos
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">3</span> Uso de su información
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">4</span> Cookies y tecnologías
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">5</span> Divulgación de información
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">6</span> Seguridad de datos
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">7</span> Sus derechos
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">8</span> Cambios en la política
+                                </li>
+                                <li class="list-group-item d-flex align-items-center border-0">
+                                    <span class="badge badge-custom-orange rounded-pill me-2">9</span> Contacto
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sección 1 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">1</span>
+                        Introducción
+                    </h2>
+                </div>
+                <div class="card-body">
                     <p>Wandering Merchant ("nosotros", "nuestra", "nuestro") se compromete a proteger y respetar su privacidad. Esta política de privacidad establece la base sobre la cual procesamos cualquier dato personal que recopilamos de usted o que nos proporciona a través de nuestra tienda en línea de productos coleccionables.</p>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 2 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">2</span>
+                        Información que recopilamos
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">2. Información que recopilamos</h2>
                     <p>Podemos recopilar y procesar los siguientes datos sobre usted:</p>
-                    <ul>
-                        <li>Información que proporciona al registrarse, realizar compras o interactuar con nuestra plataforma (nombre, dirección, email, teléfono, etc.)</li>
-                        <li>Detalles de sus visitas a nuestro sitio web y los recursos a los que accede</li>
-                        <li>Información sobre sus transacciones, incluyendo detalles de los productos coleccionables que ha adquirido</li>
-                        <li>Información proporcionada al contactar con nuestro servicio de atención al cliente</li>
+                    <ul class="list-group list-group-flush mb-0">
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-user-circle text-custom-orange me-2"></i>
+                            Información que proporciona al registrarse, realizar compras o interactuar con nuestra plataforma (nombre, dirección, email, teléfono, etc.)
+                        </li>
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-mouse-pointer text-custom-orange me-2"></i>
+                            Detalles de sus visitas a nuestro sitio web y los recursos a los que accede
+                        </li>
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-shopping-cart text-custom-orange me-2"></i>
+                            Información sobre sus transacciones, incluyendo detalles de los productos coleccionables que ha adquirido
+                        </li>
+                        <li class="list-group-item bg-transparent ps-0">
+                            <i class="fas fa-headset text-custom-orange me-2"></i>
+                            Información proporcionada al contactar con nuestro servicio de atención al cliente
+                        </li>
                     </ul>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 3 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">3</span>
+                        Uso de su información
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">3. Uso de su información</h2>
                     <p>Utilizamos la información que recopilamos para:</p>
-                    <ul>
-                        <li>Procesar sus pedidos y gestionar su cuenta</li>
-                        <li>Proporcionarle información sobre nuevos productos coleccionables, ofertas especiales o servicios que consideramos pueden interesarle</li>
-                        <li>Mejorar nuestros productos y servicios</li>
-                        <li>Personalizar su experiencia en la tienda</li>
-                        <li>Prevenir fraudes y garantizar la seguridad de las transacciones</li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-box"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Procesar pedidos</h5>
+                                    <p class="mb-0 small">Gestionar tu cuenta y los pedidos que realices</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-tags"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Ofertas y novedades</h5>
+                                    <p class="mb-0 small">Informarte sobre nuevos coleccionables y ofertas especiales</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-chart-line"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Mejora continua</h5>
+                                    <p class="mb-0 small">Mejorar nuestros productos y servicios</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <span class="bg-custom-orange p-2 rounded-circle text-white me-3">
+                                    <i class="fas fa-shield-alt"></i>
+                                </span>
+                                <div>
+                                    <h5 class="h6 mb-1">Seguridad</h5>
+                                    <p class="mb-0 small">Prevenir fraudes y garantizar transacciones seguras</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 4 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">4</span>
+                        Cookies y tecnologías similares
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">4. Cookies y tecnologías similares</h2>
-                    <p>Utilizamos cookies y tecnologías similares para mejorar su experiencia de navegación, analizar cómo utilizan los usuarios nuestro sitio y mostrar publicidad relevante. Puede configurar su navegador para rechazar todas o algunas cookies, o para que le alerte cuando los sitios web establecen o acceden a las cookies.</p>
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="fas fa-cookie-bite fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Utilizamos cookies y tecnologías similares para mejorar su experiencia de navegación, analizar cómo utilizan los usuarios nuestro sitio y mostrar publicidad relevante. Puede configurar su navegador para rechazar todas o algunas cookies, o para que le alerte cuando los sitios web establecen o acceden a las cookies.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Secciones 5-9 con el mismo estilo mejorado -->
+            <!-- Sección 5 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">5</span>
+                        Divulgación de su información
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">5. Divulgación de su información</h2>
                     <p>No vendemos ni alquilamos su información personal a terceros. Podemos compartir su información con:</p>
-                    <ul>
-                        <li>Proveedores de servicios que nos ayudan a operar nuestra tienda (procesadores de pago, servicios de logística, etc.)</li>
-                        <li>Autoridades legales cuando estamos obligados por ley</li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="alert alert-light d-flex align-items-center">
+                                <i class="fas fa-truck text-custom-orange me-3"></i>
+                                <div>Proveedores de servicios que nos ayudan a operar nuestra tienda (procesadores de pago, servicios de logística, etc.)</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="alert alert-light d-flex align-items-center">
+                                <i class="fas fa-gavel text-custom-orange me-3"></i>
+                                <div>Autoridades legales cuando estamos obligados por ley</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 6 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">6</span>
+                        Seguridad de datos
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">6. Seguridad de datos</h2>
-                    <p>Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger sus datos personales contra el procesamiento no autorizado o ilegal y contra la pérdida, destrucción o daño accidental.</p>
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="fas fa-lock fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger sus datos personales contra el procesamiento no autorizado o ilegal y contra la pérdida, destrucción o daño accidental.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 7 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">7</span>
+                        Sus derechos
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">7. Sus derechos</h2>
                     <p>Dependiendo de su ubicación, puede tener derechos relacionados con sus datos personales, incluyendo:</p>
-                    <ul>
-                        <li>Derecho de acceso a sus datos personales</li>
-                        <li>Derecho de rectificación de datos inexactos</li>
-                        <li>Derecho de supresión de sus datos</li>
-                        <li>Derecho a la limitación del tratamiento</li>
-                        <li>Derecho a la portabilidad de los datos</li>
-                        <li>Derecho de oposición al tratamiento</li>
-                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group mb-0">
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-eye text-custom-orange me-2"></i>
+                                    Derecho de acceso a sus datos personales
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-edit text-custom-orange me-2"></i>
+                                    Derecho de rectificación de datos inexactos
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-trash-alt text-custom-orange me-2"></i>
+                                    Derecho de supresión de sus datos
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group mb-0">
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-pause-circle text-custom-orange me-2"></i>
+                                    Derecho a la limitación del tratamiento
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-exchange-alt text-custom-orange me-2"></i>
+                                    Derecho a la portabilidad de los datos
+                                </li>
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-ban text-custom-orange me-2"></i>
+                                    Derecho de oposición al tratamiento
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 8 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">8</span>
+                        Cambios en nuestra política de privacidad
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">8. Cambios en nuestra política de privacidad</h2>
-                    <p>Cualquier cambio que realicemos en nuestra política de privacidad en el futuro se publicará en esta página. Por favor, revise frecuentemente para ver actualizaciones o cambios.</p>
+                    <div class="d-flex">
+                        <div class="me-3">
+                            <i class="fas fa-sync-alt fa-2x text-custom-orange"></i>
+                        </div>
+                        <div>
+                            <p>Cualquier cambio que realicemos en nuestra política de privacidad en el futuro se publicará en esta página. Por favor, revise frecuentemente para ver actualizaciones o cambios.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="card shadow-sm mb-4">
+            <!-- Sección 9 -->
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-light">
+                    <h2 class="h4 mb-0 d-flex align-items-center">
+                        <span class="badge badge-custom-orange rounded-pill me-2">9</span>
+                        Contacto
+                    </h2>
+                </div>
                 <div class="card-body">
-                    <h2 class="h4 mb-3">9. Contacto</h2>
                     <p>Si tiene alguna pregunta sobre esta política de privacidad o sobre el tratamiento de sus datos personales, puede contactarnos en:</p>
-                    <address>
-                        <strong>Wandering Merchant</strong><br>
-                        Email: privacidad@wanderingmerchant.com<br>
-                        Teléfono: +XX XXX XXX XXX<br>
-                        Dirección: [Tu dirección física]
-                    </address>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <address>
+                                        <h5><i class="fas fa-store text-custom-orange me-2"></i> Wandering Merchant</h5>
+                                        <p class="mb-0">
+                                            <i class="fas fa-map-marker-alt text-custom-orange me-2"></i> [Tu dirección física]
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2">
+                                        <i class="fas fa-envelope text-custom-orange me-2"></i>
+                                        <a href="mailto:privacidad@wanderingmerchant.com" class="text-decoration-none">privacidad@wanderingmerchant.com</a>
+                                    </p>
+                                    <p class="mb-0">
+                                        <i class="fas fa-phone text-custom-orange me-2"></i>
+                                        <a href="tel:+XXXXXXXXXXXX" class="text-decoration-none">+XX XXX XXX XXX</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
