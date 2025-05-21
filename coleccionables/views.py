@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Coleccionable, Categoria, Carrito, ItemCarrito
-from .form import ColeccionableForm 
-from .form import RegistroUsuarioForm
+from .models import Coleccionable, Categoria, Carrito, ItemCarrito, UsuarioPersonalizado
+from .form import ColeccionableForm, UsuarioForm, UsuarioUpdateForm, RegistroUsuarioForm, CategoriaForm
 from django.contrib.auth import login as django_login, authenticate
 from django.contrib.auth import logout as django_logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,  user_passes_test
 
 
 def lista_coleccionables(request):
@@ -190,8 +189,9 @@ def registro(request):
     if request.method == 'POST':
         form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, '¡Usuario registrado con éxito!')
+            usuario = form.save(commit=False)
+            usuario.rol = 'usuario'  
+            usuario.save()
             return redirect('login')  
     else:
         form = RegistroUsuarioForm()
@@ -204,3 +204,120 @@ def politica_privacidad(request):
 
 def terminos_condiciones(request):
     return render(request, 'terminos_condiciones.html')
+
+# CRUD
+
+def es_admin(user):
+    return user.is_authenticated and user.rol == 'admin'
+
+@user_passes_test(es_admin)
+def lista_productos(request):
+    coleccionables = Coleccionable.objects.all()
+    return render(request, 'coleccionables/lista.html', {'coleccionables': coleccionables})
+
+@user_passes_test(es_admin)
+def crear_coleccionable(request):
+    if request.method == 'POST':
+        form = ColeccionableForm(request.POST, request.FILES)
+        if form.is_valid():
+            nuevo = form.save(commit=False)
+            nuevo.vendedor = request.user
+            nuevo.save()
+            return redirect('lista_productos')
+    else:
+        form = ColeccionableForm()
+    return render(request, 'coleccionables/formulario.html', {'form': form, 'accion': 'Crear'})
+
+@user_passes_test(es_admin)
+def editar_coleccionable(request, pk):
+    coleccionable = get_object_or_404(Coleccionable, pk=pk)
+    if request.method == 'POST':
+        form = ColeccionableForm(request.POST, request.FILES, instance=coleccionable)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_productos')
+    else:
+        form = ColeccionableForm(instance=coleccionable)
+    return render(request, 'coleccionables/formulario.html', {'form': form, 'accion': 'Editar'})
+
+@user_passes_test(es_admin)
+def eliminar_coleccionable(request, pk):
+    coleccionable = get_object_or_404(Coleccionable, pk=pk)
+    if request.method == 'POST':
+        coleccionable.delete()
+        return redirect('lista_productos')
+    return render(request, 'coleccionables/eliminar.html', {'coleccionable': coleccionable})
+
+# CRUD USUARIOS
+@user_passes_test(es_admin)
+def lista_usuarios(request):
+    usuarios = UsuarioPersonalizado.objects.all()
+    return render(request, 'usuarios/lista.html', {'usuarios': usuarios})
+
+@user_passes_test(es_admin)
+def crear_usuario(request):
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_usuarios')
+    else:
+        form = UsuarioForm()
+    return render(request, 'usuarios/formulario.html', {'form': form, 'accion': 'Crear'})
+
+@user_passes_test(es_admin)
+def editar_usuario(request, pk):
+    usuario = get_object_or_404(UsuarioPersonalizado, pk=pk)
+    if request.method == 'POST':
+        form = UsuarioUpdateForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_usuarios')
+    else:
+        form = UsuarioUpdateForm(instance=usuario)
+    return render(request, 'usuarios/formulario.html', {'form': form, 'accion': 'Editar'})
+
+@user_passes_test(es_admin)
+def eliminar_usuario(request, pk):
+    usuario = get_object_or_404(UsuarioPersonalizado, pk=pk)
+    if request.method == 'POST':
+        usuario.delete()
+        return redirect('lista_usuarios')
+    return render(request, 'usuarios/eliminar.html', {'usuario': usuario})
+
+#CRUD CATEGORIAS
+@user_passes_test(es_admin)
+def lista_categorias(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'categorias/lista.html', {'categorias': categorias})
+
+@user_passes_test(es_admin)
+def crear_categoria(request):
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm()
+    return render(request, 'categorias/formulario.html', {'form': form, 'accion': 'Crear'})
+
+@user_passes_test(es_admin)
+def editar_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, pk=pk)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, request.FILES, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_categorias')
+    else:
+        form = CategoriaForm(instance=categoria)
+    return render(request, 'categorias/formulario.html', {'form': form, 'accion': 'Editar'})
+
+@user_passes_test(es_admin)
+def eliminar_categoria(request, pk):
+    categoria = get_object_or_404(Categoria, pk=pk)
+    if request.method == 'POST':
+        categoria.delete()
+        return redirect('lista_categorias')
+    return render(request, 'categorias/eliminar.html', {'categoria': categoria})

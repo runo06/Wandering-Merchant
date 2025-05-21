@@ -155,10 +155,11 @@
                     {{ request.user.username }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Perfil</a></li>
+                    <li><a class="dropdown-item" href="{% url 'home' %}"><i class="fas fa-sign-out-alt me-2"></i>Regresar</a></li>
+                    <!--<li><a class="dropdown-item" href="{% url 'home' %}"><i class="fas fa-user me-2"></i>Regresar</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configuración</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión</a></li>-->
                 </ul>
             </div>
         </div>
@@ -168,35 +169,40 @@
     <aside class="sidebar">
         <ul class="sidebar-nav">
             <li>
-                <a href="{% url 'lista_coleccionables' %}" class="{% if 'users' in request.path %}active{% endif %}">
+                <a href="{% url 'lista_usuarios' %}" class="{% if 'users' in request.path %}active{% endif %}">
                     <i class="fas fa-users"></i> Usuarios
                 </a>
             </li>
             <li>
-                <a href="{% url 'lista_coleccionables' %}" class="{% if 'products' in request.path %}active{% endif %}">
+                <a href="{% url 'lista_productos' %}" class="{% if 'products' in request.path %}active{% endif %}">
                     <i class="fas fa-box"></i> Productos
                 </a>
             </li>
             <li>
-                <a href="{% url 'lista_coleccionables' %}" class="{% if 'sellers' in request.path %}active{% endif %}">
+                <a href="{% url 'lista_categorias' %}" class="{% if 'sellers' in request.path %}active{% endif %}">
+                    <i class="fas fa-store"></i> Categorias
+                </a>
+            </li>
+            <!--<li>
+                <a href="{% url 'lista_productos' %}" class="{% if 'sellers' in request.path %}active{% endif %}">
                     <i class="fas fa-store"></i> Vendedores
                 </a>
             </li>
             <li>
-                <a href="{% url 'lista_coleccionables' %}" class="{% if 'orders' in request.path %}active{% endif %}">
+                <a href="{% url 'lista_productos' %}" class="{% if 'orders' in request.path %}active{% endif %}">
                     <i class="fas fa-shopping-cart"></i> Pedidos
                 </a>
             </li>
             <li>
-                <a href="{% url 'lista_coleccionables' %}" class="{% if 'reports' in request.path %}active{% endif %}">
+                <a href="{% url 'lista_productos' %}" class="{% if 'reports' in request.path %}active{% endif %}">
                     <i class="fas fa-chart-bar"></i> Reportes
                 </a>
             </li>
             <li>
-                <a href="{% url 'lista_coleccionables' %}" class="{% if 'settings' in request.path %}active{% endif %}">
+                <a href="{% url 'lista_productos' %}" class="{% if 'settings' in request.path %}active{% endif %}">
                     <i class="fas fa-cog"></i> Configuración
                 </a>
-            </li>
+            </li>-->
         </ul>
     </aside>
 
@@ -213,7 +219,7 @@
     <!-- Footer -->
     <footer class="dashboard-footer">
         <div class="text-center">
-            <p class="mb-0">&copy; {% now "Y" %} Mi Empresa. Todos los derechos reservados.</p>
+            <p class="mb-0">&copy; {% now "Y" %} Wandering Merchant. Todos los derechos reservados.</p>
         </div>
     </footer>
 

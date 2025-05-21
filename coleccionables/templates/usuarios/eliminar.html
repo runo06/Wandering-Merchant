@@ -1,0 +1,12 @@
+{% extends 'base_admin.html' %}
+
+{% block content_title %}Eliminar Usuario{% endblock %}
+
+{% block content %}
+<p>¿Estás seguro que deseas eliminar al usuario <strong>{{ usuario.username }}</strong>?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'lista_usuarios' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

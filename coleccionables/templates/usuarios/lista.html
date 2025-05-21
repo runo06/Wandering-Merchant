@@ -1,0 +1,32 @@
+{% extends 'base_admin.html' %}
+
+{% block content_title %}Lista de Usuarios{% endblock %}
+
+{% block content %}
+<a href="{% url 'crear_usuario' %}" class="btn btn-success mb-3">
+    <i class="fas fa-user-plus"></i> Agregar Usuario
+</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre de usuario</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.get_rol_display }}</td>
+            <td>
+                <a href="{% url 'editar_usuario' usuario.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'eliminar_usuario' usuario.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -33,6 +33,24 @@ urlpatterns = [
     path('politica-privacidad/', views.politica_privacidad, name='politica_privacidad'),
     path('terminos-condiciones/', views.terminos_condiciones, name='terminos_condiciones'),
 
+    #CRUD
+    path('coleccionables/ver/', views.lista_productos, name='lista_productos'),
+    path('coleccionables/crear/', views.crear_coleccionable, name='crear_coleccionable'),
+    path('coleccionables/editar/<int:pk>/', views.editar_coleccionable, name='editar_coleccionable'),
+    path('coleccionables/eliminar/<int:pk>/', views.eliminar_coleccionable, name='eliminar_coleccionable'),
+
+    #CRUD USUARIOS
+    path('usuarios/', views.lista_usuarios, name='lista_usuarios'),
+    path('usuarios/crear/', views.crear_usuario, name='crear_usuario'),
+    path('usuarios/editar/<int:pk>/', views.editar_usuario, name='editar_usuario'),
+    path('usuarios/eliminar/<int:pk>/', views.eliminar_usuario, name='eliminar_usuario'),
+
+    #CRUD CATEGORIAS
+    path('categorias/', views.lista_categorias, name='lista_categorias'),
+    path('categorias/crear/', views.crear_categoria, name='crear_categoria'),
+    path('categorias/editar/<int:pk>/', views.editar_categoria, name='editar_categoria'),
+    path('categorias/eliminar/<int:pk>/', views.eliminar_categoria, name='eliminar_categoria'),
+
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,40 @@
+{% extends 'base_admin.html' %}
+
+{% block content_title %}Lista de Coleccionables{% endblock %}
+
+{% block content %}
+<a href="{% url 'crear_coleccionable' %}" class="btn btn-success mb-3">
+    <i class="fas fa-plus"></i> Agregar Coleccionable
+</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoría</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in coleccionables %}
+        <tr>
+            <td>{{ c.titulo }}</td>
+            <td>${{ c.precio }}</td>
+            <td>{{ c.stock }}</td>
+            <td>{{ c.categoria.nombre }}</td>
+            <td>
+                {% if c.imagen %}
+                    <img src="{{ c.imagen.url }}" alt="" width="50">
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'editar_coleccionable' c.pk %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'eliminar_coleccionable' c.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
