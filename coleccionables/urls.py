@@ -27,6 +27,8 @@ urlpatterns = [
     path('carrito/', views.ver_carrito, name='ver_carrito'),
     path('quitar-del-carrito/<int:producto_id>/', views.quitar_del_carrito, name='quitar_del_carrito'),
     path('vaciar-carrito/', views.vaciar_carrito, name='vaciar_carrito'),
+    path('modificar-cantidad/<int:producto_id>/', views.modificar_cantidad, name='modificar_cantidad'),
+
 
     path('politica-privacidad/', views.politica_privacidad, name='politica_privacidad'),
     path('terminos-condiciones/', views.terminos_condiciones, name='terminos_condiciones'),

@@ -57,45 +57,72 @@ def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Coleccionable, id=producto_id)
     usuario = request.user
 
-    carrito_item, creado = Carrito.objects.get_or_create(usuario=usuario, coleccionable=producto)
+    carrito, creado = Carrito.objects.get_or_create(usuario=usuario)
 
-    if not creado:
-        carrito_item.cantidad += 1
-        carrito_item.save()
-    else:
-        carrito_item.cantidad = 1
-        carrito_item.save()
+    item, item_creado = ItemCarrito.objects.get_or_create(
+        carrito=carrito,
+        producto=producto,
+        defaults={'cantidad': 1}
+    )
+
+    if not item_creado:
+        item.cantidad += 1
+        item.save()
 
     messages.success(request, 'Producto agregado al carrito')
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required
 def ver_carrito(request):
-    usuario = request.user
-    carrito_items = Carrito.objects.filter(usuario=usuario)
-    total = sum(item.coleccionable.precio * item.cantidad for item in carrito_items)
-    
-    for item in carrito_items:
-        item.subtotal = item.coleccionable.precio * item.cantidad
-    
+    try:
+        carrito = Carrito.objects.get(usuario=request.user)
+        items = ItemCarrito.objects.filter(carrito=carrito)
+    except Carrito.DoesNotExist:
+        items = []
+
+    total = 0
+    for item in items:
+        item.subtotal = item.producto.precio * item.cantidad
+        total += item.subtotal
+
     return render(request, 'carrito.html', {
-        'carrito_items': carrito_items,
-        'total': total
+        'items': items,
+        'total': total,
     })
+
 
 @login_required
 def quitar_del_carrito(request, producto_id):
     producto = get_object_or_404(Coleccionable, id=producto_id)
-    
-    carrito, created = Carrito.objects.get_or_create(usuario=request.user)
-    
-    if producto in carrito.coleccionable.all():
-        carrito.coleccionable.remove(producto)
-        messages.success(request, f'Producto "{producto.nombre}" eliminado del carrito.')
-    else:
+
+    try:
+        carrito = Carrito.objects.get(usuario=request.user)
+        item = ItemCarrito.objects.get(carrito=carrito, producto=producto)
+        item.delete()
+        messages.success(request, f'Producto "{producto.titulo}" eliminado del carrito.')
+    except (Carrito.DoesNotExist, ItemCarrito.DoesNotExist):
         messages.warning(request, 'El producto no estaba en el carrito.')
+
+    return redirect('ver_carrito')
+
+@login_required
+def modificar_cantidad(request, producto_id):
+    if request.method == 'POST':
+        cantidad = int(request.POST.get('cantidad', 1))
+        if cantidad < 1:
+            cantidad = 1
+        
+        try:
+            carrito = Carrito.objects.get(usuario=request.user)
+            item = ItemCarrito.objects.get(carrito=carrito, producto_id=producto_id)
+            item.cantidad = cantidad
+            item.save()
+            messages.success(request, 'Cantidad actualizada correctamente.')
+        except (Carrito.DoesNotExist, ItemCarrito.DoesNotExist):
+            messages.error(request, 'No se encontró el producto en el carrito.')
     
     return redirect('ver_carrito')
+
 
 @login_required
 def vaciar_carrito(request):

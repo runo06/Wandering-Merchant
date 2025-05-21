@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Categoria, Coleccionable
+from .models import Categoria, Coleccionable, Carrito, ItemCarrito
 
 admin.site.register(Categoria)
 admin.site.register(Coleccionable)
+admin.site.register(Carrito)
+admin.site.register(ItemCarrito)
 
 from .models import UsuarioPersonalizado
 
