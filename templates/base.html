@@ -1089,21 +1089,21 @@
                 <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
                     <h5>Enlaces</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Inicio</a></li>
+                        <li class="mb-2"><a href="{% url 'home' %}" class="footer-link">Inicio</a></li>
                         <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Nosotros</a></li>
                         <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Productos</a></li>
-                        <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Contacto</a></li>
+                        <li class="mb-2"><a href="{% url 'contactos' %}" class="footer-link">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <h5>Categorías</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Monedas</a></li>
-                        <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Sellos</a></li>
-                        <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Figuras</a></li>
-                        <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Comics</a></li>
-                        <li class="mb-2"><a href="{% url 'lista_coleccionables' %}" class="footer-link">Otros</a></li>
-                    </ul>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="{% url 'categoria' slug='monedas' %}" class="footer-link">Monedas</a></li>
+                    <li class="mb-2"><a href="{% url 'categoria' slug='sellos' %}" class="footer-link">Sellos</a></li>
+                    <li class="mb-2"><a href="{% url 'categoria' slug='figuras' %}" class="footer-link">Figuras</a></li>
+                    <li class="mb-2"><a href="{% url 'categoria' slug='comics' %}" class="footer-link">Comics</a></li>
+                    <li class="mb-2"><a href="{% url 'categorias' %}" class="footer-link">Otros</a></li>
+                </ul>
                 </div>
                 <div class="col-lg-4">
                     <h5>Contáctanos</h5>

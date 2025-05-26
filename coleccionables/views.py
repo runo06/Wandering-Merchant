@@ -46,7 +46,7 @@ def productos_por_categoria(request, slug):
         'productos': productos,
     })
 
-def lista_categorias(request):
+def categorias(request):
     categorias = Categoria.objects.all()
     return render(request, 'lista_categorias.html', {'categorias': categorias})
 
