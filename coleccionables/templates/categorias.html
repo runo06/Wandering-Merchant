@@ -15,9 +15,9 @@
           {% for producto in productos %}
             <div class="col-md-4">
               <div class="card h-100 shadow">
-                <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}" style="height: 250px; object-fit: cover;">
+                <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}" style="height: 250px; object-fit: cover;">
                 <div class="card-body text-center">
-                  <h5 class="card-title">{{ producto.nombre }}</h5>
+                  <h5 class="card-title">{{ producto.titulo }}</h5>
                   <p class="card-text">${{ producto.precio }}</p>
                   <p class="card-text small">{{ producto.descripcion|truncatechars:100 }}</p>
                   <a href=" {% url 'producto_detalle' producto.id %} " class="btn btn-primary">Ver más</a>

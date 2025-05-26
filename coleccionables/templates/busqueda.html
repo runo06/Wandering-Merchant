@@ -9,12 +9,11 @@
         {% for item in coleccionables %}
         <div class="col-md-4">
             <div class="card h-100 shadow">
-                <img src="{{ item.imagen.url }}" class="card-img-top" alt="{{ item.nombre }}"
+                <img src="{{ item.imagen.url }}" class="card-img-top" alt="{{ item.titulo }}"
                     style="height: 250px; object-fit: cover;">
                 <div class="card-body text-center">
-                    <h5 class="card-title">{{ item.nombre }}</h5>
+                    <h5 class="card-title">{{ item.titulo }}</h5>
                     <p class="card-text">${{ item.precio }}</p>
-                    <p class="card-text small">{{ item.descripcion|truncatechars:100 }}</p>
                     <a href=" {% url 'producto_detalle' item.id %} " class="btn btn-primary">Ver más</a>
                 </div>
             </div>
