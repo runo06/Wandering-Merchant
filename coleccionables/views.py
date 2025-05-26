@@ -33,6 +33,18 @@ def home(request):
     categorias = Categoria.objects.all()[:4]  
     return render(request, 'home.html', {'productos': productos_destacados, 'categorias': categorias})
 
+def busqueda(request):
+    query = request.GET.get('q')
+    coleccionables = Coleccionable.objects.all()
+    
+    if query:
+        coleccionables = coleccionables.filter(titulo__icontains=query)
+
+    return render(request, 'busqueda.html', {
+        'coleccionables': coleccionables,
+        'query': query
+    })
+
 def producto_detalle(request, pk):
     producto = get_object_or_404(Coleccionable, pk=pk)
     return render(request, 'producto_detalle.html', {'producto': producto})

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Resultados de búsqueda{% if query %} para "{{ query }}"{% endif %}</h2>
+
+    <div class="row g-4">
+        {% for item in coleccionables %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow">
+                <img src="{{ item.imagen.url }}" class="card-img-top" alt="{{ item.nombre }}"
+                    style="height: 250px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ item.nombre }}</h5>
+                    <p class="card-text">${{ item.precio }}</p>
+                    <p class="card-text small">{{ item.descripcion|truncatechars:100 }}</p>
+                    <a href=" {% url 'producto_detalle' item.id %} " class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-4">
+            <p class="text-secondary">No hay productos disponibles en este momento.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
