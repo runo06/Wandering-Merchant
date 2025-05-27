@@ -7,9 +7,12 @@ urlpatterns = [
     
     path('', views.home , name='home'),
     path('home/', views.home, name='home'),
-    path('busqueda/', views.busqueda, name='busqueda'),  
+    path('busqueda/', views.busqueda, name='busqueda'),
+
     path('login/', views.user_login, name='login'),  
     path('logout/', views.user_logout, name='logout'),
+
+    
     path('registro/', views.registro, name='registro'),
     path('coleccionables/', views.lista_coleccionables, name='lista_coleccionables'),
     path('coleccionables/nuevo/', views.crear_coleccionable, name='crear_coleccionable'),
@@ -50,7 +53,7 @@ urlpatterns = [
     path('usuarios/eliminar/<int:pk>/', views.eliminar_usuario, name='eliminar_usuario'),
 
     #CRUD CATEGORIAS
-    path('categorias/', views.lista_categorias, name='lista_categorias'),
+    path('categorias/ver/', views.lista_categorias, name='lista_categorias'),
     path('categorias/crear/', views.crear_categoria, name='crear_categoria'),
     path('categorias/editar/<int:pk>/', views.editar_categoria, name='editar_categoria'),
     path('categorias/eliminar/<int:pk>/', views.eliminar_categoria, name='eliminar_categoria'),
