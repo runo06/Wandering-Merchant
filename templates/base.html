@@ -762,7 +762,7 @@
                                 {% for categoria in categorias %}
                                     <li><a class="dropdown-item" href="{% url 'categoria' categoria.slug %}">{{ categoria.nombre }}</a></li>
                                 {% endfor %}
-                                <li><a class="dropdown-item" href="{% url 'lista_categorias' %}">Ver todas las categorías</a></li>
+                                <li><a class="dropdown-item" href="{% url 'categorias' %}">Ver todas las categorías</a></li>
                             </ul>                                                      
                         </li>
                         <li class="nav-item">
