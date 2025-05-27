@@ -1,40 +1,57 @@
 {% extends 'base_admin.html' %}
 
-{% block content_title %}Lista de Coleccionables{% endblock %}
+{% block content_title %}
+<h1 class="mb-4 text-primary">Lista de Coleccionables</h1>
+{% endblock %}
 
 {% block content %}
-<a href="{% url 'crear_coleccionable' %}" class="btn btn-success mb-3">
-    <i class="fas fa-plus"></i> Agregar Coleccionable
-</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Categoría</th>
-            <th>Imagen</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for c in coleccionables %}
-        <tr>
-            <td>{{ c.titulo }}</td>
-            <td>${{ c.precio }}</td>
-            <td>{{ c.stock }}</td>
-            <td>{{ c.categoria.nombre }}</td>
-            <td>
-                {% if c.imagen %}
-                    <img src="{{ c.imagen.url }}" alt="" width="50">
-                {% endif %}
-            </td>
-            <td>
-                <a href="{% url 'editar_coleccionable' c.pk %}" class="btn btn-sm btn-warning">Editar</a>
-                <a href="{% url 'eliminar_coleccionable' c.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <a href="{% url 'crear_coleccionable' %}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Agregar Coleccionable
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr class="text-center">
+                <th scope="col">Título</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in coleccionables %}
+            <tr class="text-center">
+                <td>{{ c.titulo }}</td>
+                <td><span class="badge bg-secondary">${{ c.precio }}</span></td>
+                <td>{{ c.stock }}</td>
+                <td>{{ c.categoria.nombre }}</td>
+                <td>
+                    {% if c.imagen %}
+                        <img src="{{ c.imagen.url }}" alt="Imagen de {{ c.titulo }}" class="img-thumbnail" width="60" height="60">
+                    {% else %}
+                        <span class="text-muted">Sin imagen</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'editar_coleccionable' c.pk %}" class="btn btn-sm btn-warning me-1">
+                        <i class="fas fa-edit"></i> Editar
+                    </a>
+                    <a href="{% url 'eliminar_coleccionable' c.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este coleccionable?');">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center text-muted">No hay coleccionables registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
