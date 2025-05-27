@@ -13,27 +13,42 @@
     
     .product-image-container {
         position: relative;
-        margin-bottom: 1rem;
-    }
-    
-    .product-main-image {
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        width: 100%;
     }
     
+    /* Asegura que el div contenedor no recorte la imagen */
+    .product-main-image {
+        width: 100%;
+        height: auto;
+    }
+    
+    /* Ajusta bien la imagen sin cortes */
+    .product-main-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain; /* Cambiado de 'cover' a 'contain' para evitar cortes */
+    }
+    
+    /* Badge "Nuevo" bien posicionado */
     .product-badge {
         position: absolute;
-        top: 15px;
-        left: 15px;
-        z-index: 10;
-        font-size: 0.75rem;
-        font-weight: 500;
-        padding: 0.35rem 0.75rem;
-        border-radius: 50px;
-        background-color: var(--primary-color);
+        top: 10px;
+        left: 10px;
+        background-color: #e63946;
         color: white;
+        padding: 5px 12px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        z-index: 2;
     }
+    
+    
     
     .product-thumbnails {
         display: flex;
@@ -422,7 +437,6 @@
 <!-- Sección principal del producto -->
 <section class="product-main container">
     <div class="row">
-        <!-- Galería de imágenes -->
         <div class="col-lg-6">
             <div class="product-image-container">
                 {% if producto.es_nuevo %}
@@ -431,9 +445,10 @@
                 <div class="product-main-image">
                     <img src="{{ producto.imagen.url }}" class="img-fluid" alt="{{ producto.titulo }}">
                 </div>
-                
             </div>
         </div>
+        
+        
         
         <!-- Información del producto -->
         <div class="col-lg-6 product-info-container">
@@ -472,6 +487,7 @@
                     </div>
                 {% endif %}
             </div>
+            
 
             {% if messages %}
             <ul class="mensajes">
