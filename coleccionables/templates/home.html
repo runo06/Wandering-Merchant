@@ -34,10 +34,15 @@
     }
     
     .hero-image {
+        position: relative;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
+
+    .hero-image img{
+        height: 500px;
+    }
+
     
     .category-card {
         border: none;
@@ -155,10 +160,12 @@
                 <a href="#featured" class="btn btn-primary px-4 py-2">Explorar colección</a>
             </div>
             <div class="col-lg-6">
-                <div class="hero-image">
-                    <img src="{% static 'images/imagen_banner.jpg' %}" alt="Coleccionables destacados" class="img-fluid">
+                <div class="hero-image with-overlay">
+                    <img src="{% static 'images/nuevo_icono.png' %}" alt="Coleccionables destacados" class="img-fluid">
+                    <div class="image-overlay"></div>
                 </div>
             </div>
+            
         </div>
     </div>
 </section>
