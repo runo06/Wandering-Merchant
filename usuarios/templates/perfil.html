@@ -1,0 +1,656 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-orange: #FF4500;
+        --secondary-orange: #FF6B35;
+        --gradient-start: #FF4500;
+        --gradient-end: #FF8C69;
+        --dark-bg: #2c2c2c;
+        --light-gray: #f8f9fa;
+        --border-color: #e9ecef;
+    }
+
+    body {
+        background: linear-gradient(135deg, var(--primary-orange) 0%, #FF593C 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+        background-color: var(--dark-bg) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .navbar-nav .nav-link {
+        color: white !important;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: var(--primary-orange) !important;
+    }
+
+    .profile-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+        padding: 3rem 0 8rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .profile-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+    .profile-avatar {
+        position: relative;
+        z-index: 2;
+    }
+
+    .avatar-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 2rem auto;
+        border: 5px solid white;
+        border-radius: 50%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .avatar-container:hover {
+        transform: scale(1.05);
+    }
+
+    .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .avatar-upload {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        text-align: center;
+        padding: 0.5rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .avatar-container:hover .avatar-upload {
+        opacity: 1;
+    }
+
+    #id_avatar {
+        display: none;
+    }
+
+    #id_avatar:focus + .avatar-container {
+        outline: 2px solid var(--primary-orange);
+        outline-offset: 2px;
+    }
+
+    .profile-name {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-title {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+
+    .profile-body {
+        padding: 0;
+        margin-top: -5rem;
+        position: relative;
+        z-index: 3;
+    }
+
+    .profile-nav {
+        background: white;
+        border-radius: 15px;
+        margin: 0 2rem 2rem 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-pills .nav-link {
+        color: #343b29;
+        border-radius: 10px;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+        border: none;
+        background: none;
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: var(--primary-orange);
+        color: white;
+    }
+
+    .nav-pills .nav-link:hover:not(.active) {
+        background-color: rgba(255, 69, 0, 0.1);
+        color: var(--primary-orange);
+    }
+
+    .content-section {
+        padding: 0 2rem 2rem 2rem;
+    }
+
+    .info-card {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .info-card h5 {
+        color: var(--primary-orange);
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        border: 2px solid var(--border-color);
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: var(--primary-orange);
+        box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.25);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-orange);
+        border-color: var(--primary-orange);
+        border-radius: 10px;
+        padding: 0.75rem 2rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--secondary-orange);
+        border-color: var(--secondary-orange);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+    }
+
+    .btn-outline-primary {
+        border-color: var(--primary-orange);
+        color: var(--primary-orange);
+        border-radius: 10px;
+        padding: 0.75rem 2rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: var(--primary-orange);
+        border-color: var(--primary-orange);
+    }
+
+    .stats-card {
+        text-align: center;
+        padding: 2rem 1rem;
+        border-radius: 15px;
+        background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .stats-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    .collection-item {
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .collection-item:hover {
+        border-color: var(--primary-orange);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .collection-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .profile-header {
+            padding: 2rem 0 6rem 0;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+        }
+
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-nav {
+            margin: 0 1rem 1rem 1rem;
+        }
+
+        .content-section {
+            padding: 0 1rem 1rem 1rem;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+        }
+    }
+
+    .tab-content {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Profile Container -->
+<div class="container">
+    <div class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="container">
+                <div class="profile-avatar text-center">
+                    <form method="post" enctype="multipart/form-data" action="{% url 'perfil' %}">
+                        {% csrf_token %}
+                        <div class="avatar-container" onclick="document.getElementById('id_avatar').click()">
+                            <img src="{% if usuario.avatar %}{{ usuario.avatar.url }}{% endif %}"
+                                alt="Avatar" class="avatar-img" id="avatar-preview">
+                            <div class="avatar-upload">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        {{ form.avatar }}
+                            <button type="submit" class="btn btn-sm btn-primary mt-2">
+                                <i class="fas fa-upload"></i> Subir Avatar
+                            </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Body -->
+        <div class="profile-body">
+            <!-- Navigation Tabs -->
+            <div class="profile-nav">
+                <ul class="nav nav-pills justify-content-center" id="profile-tabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#info-tab">
+                            <i class="fas fa-user"></i> Información Personal
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#collection-tab">
+                            <i class="fas fa-box"></i> Mi Colección
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#settings-tab">
+                            <i class="fas fa-cog"></i> Configuración
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="content-section">
+                <div class="tab-content" id="profile-tab-content">
+                    <!-- Personal Information Tab -->
+                    <div class="tab-pane fade show active" id="info-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="info-card">
+                                    <h5><i class="fas fa-user-edit"></i> Información Personal</h5>
+                                    <form method="post" action="{% url 'perfil' %}" id="info-form">
+                                        {% csrf_token %}
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="{{ form.first_name.id_for_label }}" class="form-label">Nombre</label>
+                                                {{ form.first_name }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="{{ form.last_name.id_for_label }}" class="form-label">Apellido</label>
+                                                {{ form.last_name }}
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                                                {{ form.username }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                                                {{ form.email }}
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="{{ form.telefono.id_for_label }}" class="form-label">Teléfono</label>
+                                            {{ form.telefono }}
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="{{ form.biografia.id_for_label }}" class="form-label">Biografía</label>
+                                            {{ form.biografia }}
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Guardar Cambios
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="stats-card">
+                                    <div class="stats-number">247</div>
+                                    <div class="stats-label">Artículos en Colección</div>
+                                </div>
+                                <div class="stats-card">
+                                    <div class="stats-number">15</div>
+                                    <div class="stats-label">Categorías</div>
+                                </div>
+                                <div class="stats-card">
+                                    <div class="stats-number">89%</div>
+                                    <div class="stats-label">Completitud</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Collection Tab -->
+                    <div class="tab-pane fade" id="collection-tab">
+                        <div class="info-card">
+                            <h5><i class="fas fa-box-open"></i> Mi Colección Reciente</h5>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="collection-item d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/60x60/FF4500/FFFFFF?text=F1" alt="Item" class="collection-img me-3">
+                                        <div>
+                                            <h6 class="mb-1">Figura Dragon Ball Z</h6>
+                                            <small class="text-muted">Agregado hace 2 días</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="collection-item d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/60x60/FF4500/FFFFFF?text=C1" alt="Item" class="collection-img me-3">
+                                        <div>
+                                            <h6 class="mb-1">Carta Pokémon Rare</h6>
+                                            <small class="text-muted">Agregado hace 5 días</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="collection-item d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/60x60/FF4500/FFFFFF?text=F2" alt="Item" class="collection-img me-3">
+                                        <div>
+                                            <h6 class="mb-1">Manga Vintage</h6>
+                                            <small class="text-muted">Agregado hace 1 semana</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-outline-primary">
+                                    <i class="fas fa-plus"></i> Agregar Nuevo Item
+                                </button>
+                                <button class="btn btn-primary ms-2">
+                                    <i class="fas fa-eye"></i> Ver Colección Completa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="tab-pane fade" id="settings-tab">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="info-card">
+                                    <h5><i class="fas fa-shield-alt"></i> Seguridad</h5>
+                                    <form id="password-form">
+                                        <div class="mb-3">
+                                            <label class="form-label">Contraseña Actual</label>
+                                            <input type="password" class="form-control" id="current-password">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Nueva Contraseña</label>
+                                            <input type="password" class="form-control" id="new-password">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Confirmar Contraseña</label>
+                                            <input type="password" class="form-control" id="confirm-password">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-key"></i> Cambiar Contraseña
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="info-card">
+                                    <h5><i class="fas fa-bell"></i> Notificaciones</h5>
+                                    <form id="notifications-form">
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="emailNotif" checked>
+                                            <label class="form-check-label" for="emailNotif">
+                                                Notificaciones por Email
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="newItems" checked>
+                                            <label class="form-check-label" for="newItems">
+                                                Nuevos artículos disponibles
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="priceAlerts">
+                                            <label class="form-check-label" for="priceAlerts">
+                                                Alertas de precio
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Guardar Preferencias
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Avatar upload - handled by Django backend
+
+    // Profile info form submission - handled by Django
+    document.getElementById('info-form').addEventListener('submit', function (e) {
+        // Form validation before submission
+        const firstName = document.querySelector('[name="first_name"]').value;
+        const lastName = document.querySelector('[name="last_name"]').value;
+        
+        if (!firstName.trim() || !lastName.trim()) {
+            e.preventDefault();
+            alert('Por favor, completa todos los campos requeridos');
+            return;
+        }
+        
+        // Show loading state
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+        btn.disabled = true;
+    });
+
+    // Password form submission - handled by Django
+    document.getElementById('password-form').addEventListener('submit', function (e) {
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        if (newPassword !== confirmPassword) {
+            e.preventDefault();
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+        
+        if (newPassword.length < 8) {
+            e.preventDefault();
+            alert('La contraseña debe tener al menos 8 caracteres');
+            return;
+        }
+        
+        // Show loading state
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cambiando...';
+        btn.disabled = true;
+    });
+
+    // Notifications form submission - handled by Django
+    document.getElementById('notifications-form').addEventListener('submit', function (e) {
+        // Show loading state
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+        btn.disabled = true;
+    });
+
+    // Smooth scrolling for tab changes
+    document.querySelectorAll('[data-bs-toggle="pill"]').forEach(function (tab) {
+        tab.addEventListener('shown.bs.tab', function () {
+            const activeTab = document.querySelector('.tab-pane.active');
+            if (activeTab) {
+                activeTab.style.animation = 'none';
+                activeTab.offsetHeight;
+                activeTab.style.animation = 'fadeIn 0.5s ease-in-out';
+            }
+        });
+    });
+
+    // Form validations
+    function validateForm(formId) {
+        const form = document.getElementById(formId);
+        const inputs = form.querySelectorAll('input[required], textarea[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        return isValid;
+    }
+
+    // Real-time form validation
+    document.querySelectorAll('input, textarea').forEach(input => {
+        input.addEventListener('blur', function () {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+    });
+
+    // Mobile responsive adjustments
+    function handleResize() {
+        const isMobile = window.innerWidth < 768;
+        const profileNav = document.querySelector('.profile-nav .nav');
+
+        if (isMobile) {
+            profileNav.classList.add('flex-column');
+        } else {
+            profileNav.classList.remove('flex-column');
+        }
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+</script>
+{% endblock %}

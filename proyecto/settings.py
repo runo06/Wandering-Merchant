@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'coleccionables',
+    'usuarios',
+    'core',
+    'carrito',
+    'panel',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -64,8 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'coleccionables.context_processors.categorias_context',
-                'coleccionables.context_processors.cart_count',
+                'core.context_processors.categorias_context',
+                'core.context_processors.cart_count',
             ],
         },
     },
@@ -109,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
@@ -134,4 +140,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'coleccionables.UsuarioPersonalizado'
+AUTH_USER_MODEL = 'usuarios.UsuarioPersonalizado'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'root',
+    'API_KEY': '758348152631432',
+    'API_SECRET': '3OMzH9Dif-ZlrudOcmCZz5aNlz4',
+}

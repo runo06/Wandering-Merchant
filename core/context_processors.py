@@ -1,4 +1,5 @@
-from .models import Categoria, Carrito, ItemCarrito
+from coleccionables.models import Categoria
+from carrito.models import Carrito, ItemCarrito
 
 def categorias_context(request):
     categorias = Categoria.objects.all()[:5]
